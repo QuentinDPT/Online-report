@@ -7,20 +7,20 @@ switch($URL){
     break ;
   case "/acceuil" :
     require("./Views/home.php") ;
-    break ;
+    die() ;
   case "/connexion" :
     require("./Views/connection.php") ;
-    break ;
+    die() ;
   case "/mon-profil" :
     require("./Views/profile.php") ;
-    break ;
+    die() ;
   case "/mes-reussites" :
     require("./Views/achievements.php") ;
-    break ;
+    die() ;
   case "/ma-classe" :
     require("./Views/class.php") ;
-    break ;
-  default :
-    require("./Views/error.php") ;
-    break ;
+    die() ;
 }
+
+http_response_code(404);
+require("./Views/error.php") ;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
-    <?php $PageName = "Error 404" ?>
+    <?php $PageName = "Erreur" ?>
     <?php require("./Views/Common/header.php") ?>
   </head>
   <body>
