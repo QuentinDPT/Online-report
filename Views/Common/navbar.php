@@ -25,8 +25,9 @@
     <?php
       if($User != null){
         echo '<div class="navbar-nav" ' . ($NavActive == "profile" ? "" : 'onclick="location.href = \'mon-profil\';"') . '>' ;
-        echo '  <div class="nav-link ' . ($NavActive != "profile" ? "" : "active") . '">' . $User->Name  ;
-        echo '    <img class="rounded-circle" style="height:50px; width:50px;" src="' . $User->Avatar . '" alt="Avatar">' ;
+        echo '  <div class="nav-link ' . ($NavActive != "profile" ? "" : "active") . '">' ;
+        echo $User->_name ;
+        echo '    <img class="rounded-circle" style="height:50px; width:50px;" src="' . $User->_avatar . '" alt="Avatar">' ;
         echo '  </div>' ;
         echo '</div>' ;
       }else{

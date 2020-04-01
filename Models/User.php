@@ -7,8 +7,11 @@ require_once $ROOT . '/Models/AccessDB.php' ;
  */
 class User extends Model_Base
 {
-	private $_login;
-	private $_password;
+	public $_login;
+	public $_password;
+	public $_name;
+	public $_firstName ;
+	public $_avatar ;
 
 	const USER_TABLE = "user";
 
@@ -16,16 +19,6 @@ class User extends Model_Base
 	{
 		$this->_login = $login;
 		$this->_password = $password;
-	}
-
-	public function login() : string
-	{
-		return $this->_login;
-	}
-
-	public function password() : string
-	{
-		return $this->_password;
 	}
 
 	public function exists() : bool
@@ -41,6 +34,21 @@ class User extends Model_Base
 		}
 
 		return $ok;
+	}
+
+	public function parseDB(){
+		$q = self::$_db->prepare('SELECT * FROM '.User::USER_TABLE.' WHERE login = :login');
+	  $ok  = $q->bindValue(':login', $this->_login, PDO::PARAM_STR);
+	  $ok &= $q->execute();
+
+		if ($ok)
+		{
+			$user = $q->fetch(PDO::FETCH_ASSOC);
+			var_dump($user) ;
+			$this->_name = $user['Name'];
+			$this->_firstName = $user['Frist_Name'];
+			$this->_avatar = $user['Avatar'];
+		}
 	}
 
 	public function create()

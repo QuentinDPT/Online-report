@@ -46,6 +46,8 @@ if ( !$user->exists() )
     exit;
 }
 
-$_SESSION['user'] = $login;
+$user->parseDB() ;
+
+$_SESSION['user'] = serialize($user);
 header('Location: ' . $LOCATION . '/acceuil');
 exit;

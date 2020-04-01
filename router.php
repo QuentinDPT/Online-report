@@ -1,5 +1,5 @@
 <?php
-require "./vars.php" ;
+require_once "./vars.php" ;
 
 // URLs
 switch($URL){
