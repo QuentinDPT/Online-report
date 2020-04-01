@@ -5,6 +5,6 @@
     <?php require("./Views/Common/header.php") ?>
   </head>
   <body>
-
+    <?php require("./Views/Common/navbar.php") ?>
   </body>
 </html>
