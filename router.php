@@ -1,9 +1,11 @@
 <?php
-require("./vars.php") ;
+require "./vars.php" ;
 
+// URLs
 switch($URL){
   case "/" :
     header("Location: acceuil");
+    die() ;
     break ;
   case "/acceuil" :
     require("./Views/home.php") ;
@@ -19,6 +21,16 @@ switch($URL){
     die() ;
   case "/ma-classe" :
     require("./Views/class.php") ;
+    die() ;
+}
+
+// APIs
+switch($URL){
+  case "/api/login" :
+    require("./API/login.php") ;
+    die() ;
+  case "/api/logout" :
+    require("./API/logout.php") ;
     die() ;
 }
 
