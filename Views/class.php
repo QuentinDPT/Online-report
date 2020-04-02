@@ -16,7 +16,7 @@ if($User == null){
     <div class="container-lg">
       <?php
         require_once $ROOT . "/Controllers/ClassController.php" ;
-        $Class = ClassroomController::getClassByTeacherId($User->_teacher == null ? $User->_id : $User->_teacher) ;
+        $Class = ClassroomController::getClassByTeacherId($User->teacher == null ? $User->id : $User->teacher) ;
       ?>
       <ul>
         <?php

@@ -16,7 +16,7 @@
         <div class="nav-link">Ma classe</div>
       </li>
       <?php
-          if($User->_teacher == null){
+          if($User->teacher == null){
       ?>
       <li class="nav-item <?php echo ($NavActive != "patent" ? "\" onclick=\"location.href='/brevets';" : "active" )?>">
         <div class="nav-link">Brevets</div>
@@ -38,8 +38,8 @@
     <?php
       if($User != null){
         echo '<div class="navbar-nav" ' . ($NavActive == "profile" ? "" : 'onclick="location.href = \'/mon-profil\';"') . '>' ;
-        echo '  <div class="nav-link ' . ($NavActive != "profile" ? "" : "active") . '">' . $User->_firstName . " " .  $User->_name ;
-        echo '    <img class="rounded-circle" style="height:50px; width:50px;" src="' . $User->_avatar . '" alt="Avatar">' ;
+        echo '  <div class="nav-link ' . ($NavActive != "profile" ? "" : "active") . '">' . $User->firstName . " " .  $User->name ;
+        echo '    <img class="rounded-circle" style="height:50px; width:50px;" src="' . $User->avatar . '" alt="Avatar">' ;
         echo '  </div>' ;
         echo '</div>' ;
       }else{

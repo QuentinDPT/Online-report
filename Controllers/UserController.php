@@ -27,16 +27,15 @@ class UserController extends Model_Base
 
 	public static function log($User) : bool
 	{
-		$q = self::$_db->prepare('SELECT password FROM '.User::USER_TABLE.' WHERE login = :login');
-	  $ok  = $q->bindValue(':login', $User->_login, PDO::PARAM_STR);
+		$q = self::$_db->prepare('SELECT password FROM '.UserController::USER_TABLE.' WHERE login = :login');
+	  $ok  = $q->bindValue(':login', $User->login, PDO::PARAM_STR);
 	  $ok &= $q->execute();
 
 		if ($ok)
 		{
 			$user = $q->fetch(PDO::FETCH_ASSOC);
-			$ok = $user && password_verify($this->_password,$user['password']);
+			$ok = $user && password_verify($User->password,$user['password']);
 		}
-
 		return $ok;
 	}
 
