@@ -55,19 +55,19 @@ if($User == null){
             <tr>
               <td>Prénom</td>
               <td>
-                <input type="text" class="w-100" name="firstName" id="firstName" value="<?php echo $User->_firstName ?>">
+                <input type="text" class="w-100" name="firstName" id="firstName" value="<?php echo $User->firstName ?>">
               </td>
             </tr>
             <tr>
               <td>Nom</td>
               <td>
-                <input type="text" class="w-100" name="name" id="name" value="<?php echo $User->_name ?>">
+                <input type="text" class="w-100" name="name" id="name" value="<?php echo $User->name ?>">
               </td>
             </tr>
             <tr>
               <td>Photo</td>
               <td>
-                <input type="text" class="w-100" name="avatar" id="avatar" value="<?php echo $User->_avatar ?>">
+                <input type="text" class="w-100" name="avatar" id="avatar" value="<?php echo $User->avatar ?>">
               </td>
             </tr>
           </tbody>
