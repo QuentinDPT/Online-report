@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item <?php echo ($NavActive != "home" ? "\" onclick=\"location.href='./acceuil';" : "active" )?>">
-        <div class="nav-link">Acceuil</div>
+        <div class="nav-link">Accueil</div>
       </li>
       <?php
         if($User != null){
