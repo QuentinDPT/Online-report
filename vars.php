@@ -3,8 +3,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	session_start();
 }
 
-$ROOT = dirname(dirname(__FILE__)) . "/www" ;
-$LOCATION = "http://localhost" ;
+$ROOT = dirname(dirname(__FILE__)) ;
+$LOCATION = "http://laclasse.depotter.fr" ;
 
 // Application title
 $ApplicationName = "La classe" ;
