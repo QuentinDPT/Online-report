@@ -51,7 +51,7 @@ $user->parseDB() ;
 $_SESSION['user'] = serialize($user);
 
 if($user->_password == ""){
-  header('Location: ' . $LOCATION . '/mot-de-passe');
+  header('Location: ' . $LOCATION . '/mot-de-passe-faible');
 }else{
   header('Location: ' . $LOCATION . '/acceuil');
 }

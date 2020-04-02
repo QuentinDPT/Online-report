@@ -17,19 +17,12 @@ if($User == null){
     <main>
       <div class="container-lg">
         <div class="row">
-          <h2>Changer votre mot de passe</h2>
+          <h2>Votre compte n'est pas protégé par un mot de passe</h2>
+          <p>Nous vous conseillons de changer de mot de passe pour éviter que des utilisateurs mal intentionnés puissent avoir accès à vos données personnelles.</p>
           <form class="col-md-12" action="/api/change-password" method="post">
 
             <table class="w-100">
               <tbody>
-                <tr>
-                  <td>
-                    <label class="w-100" for="password">Ancien mot de passe</label>
-                  </td>
-                  <td>
-                    <input class="w-100" type="password" id="password" name="password" placeholder="R75fg%l8">
-                  </td>
-                </tr>
                 <tr>
                   <td>
                     <label class="w-100" for="password">Nouveau mot de passe</label>

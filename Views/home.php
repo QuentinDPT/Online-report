@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
-    <?php $PageName = "Acceuil" ?>
+    <?php $PageName = "Accueil" ?>
     <?php require("./Views/Common/header.php") ?>
   </head>
   <body>

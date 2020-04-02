@@ -17,6 +17,9 @@ switch($URL){
 
 // URLs User Connected
 switch($URL){
+  case "/mot-de-passe-faible" :
+    require("./Views/change-password-weak.php") ;
+    die() ;
   case "/mot-de-passe" :
     require("./Views/change-password.php") ;
     die() ;
@@ -61,6 +64,10 @@ switch($URL){
   case "/api/getClass" :
     require("./API/getClass.php") ;
     die() ;
+  case "/api/changeUserInfo" :
+    require("./API/changeUserInfo.php") ;
+    die() ;
+
 }
 
 http_response_code(404);
