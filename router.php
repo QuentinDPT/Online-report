@@ -67,8 +67,20 @@ switch($URL){
   case "/api/changeUserInfo" :
     require("./API/changeUserInfo.php") ;
     die() ;
-
 }
 
+$URLHashed = explode('/',$URL) ;
+if(count($URLHashed) >=3){
+  switch($URLHashed[1]){
+    case("utilisateur"):
+      $UserName = $URLHashed[2] ;
+      require("./Views/a-user.php") ;
+      break ;
+    case("brevet"):
+      $PatentId = $URLHashed[2] ;
+      require("./Views/a-patent.php") ;
+      break ;
+  }
+}
 http_response_code(404);
 require("./Views/error.php") ;

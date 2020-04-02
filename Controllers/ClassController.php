@@ -1,8 +1,8 @@
 <?php
 
 require_once $ROOT . '/Models/AccessDB.php' ;
-require_once $ROOT . '/Models/User.php' ;
 require_once $ROOT . '/DBConfig.php';
+require_once $ROOT . '/Models/Class.php' ;
 
 try
 {
@@ -21,36 +21,54 @@ Model_Base::set_db( $db );
  */
 class ClassroomController extends Model_Base
 {
-	public $_teacher ;
-  public $_students ;
-
 	const USER_TABLE = "user";
 
-	public function __construct( $teacher_id)
-	{
-		$this->_teacher = $teacher_id;
-	}
+	public function __construct() { }
 
-	public function parseDB(){
-		$q = self::$_db->prepare('SELECT * FROM '.ClassroomController::USER_TABLE.' WHERE teacher_id = :teacher');
-	  $ok  = $q->bindValue(':teacher', $this->_teacher, PDO::PARAM_STR);
+  public static function getClassByTeacherId($id){
+		$q = self::$_db->prepare('SELECT * FROM '.ClassroomController::USER_TABLE.' WHERE id = :teacher');
+	  $ok  = $q->bindValue(':teacher', $id, PDO::PARAM_STR);
 	  $ok &= $q->execute();
 
 		if ($ok)
 		{
-      $this->_students = array() ;
+      $teacher = new User(
+        $req['User_ID'],
+        $req['Teacher_ID'],
+        $req['Name'],
+        $req['Frist_Name'],
+        $req['Avatar'],
+        $req['Login'],
+        $req['Password']
+      ) ;
+		}else{
+      $teacher = $id ;
+    }
+
+		$q = self::$_db->prepare('SELECT * FROM '.ClassroomController::USER_TABLE.' WHERE teacher_id = :teacher');
+	  $ok  = $q->bindValue(':teacher', $id, PDO::PARAM_STR);
+	  $ok &= $q->execute();
+
+		if ($ok)
+		{
+      $ret = new Classroom($teacher,array()) ;
       do{
   			$req = $q->fetch(PDO::FETCH_ASSOC);
         if($req){
-          $usr = new User("") ;
-    			$usr->_login = $req['Login'];
-    			$usr->_name = $req['Name'];
-    			$usr->_firstName = $req['Frist_Name'];
-    			$usr->_avatar = $req['Avatar'];
-    			$usr->_id = $req['User_ID'] ;
-          array_push($this->_students, $usr) ;
+          $usr = new User(
+            $req['User_ID'],
+            $req['Teacher_ID'],
+            $req['Name'],
+            $req['Frist_Name'],
+            $req['Avatar'],
+            $req['Login'],
+            $req['Password']
+          ) ;
+          array_push($ret->students, $usr) ;
         }
       }while($req) ;
+      return $ret ;
 		}
-	}
+    return null ;
+  }
 }
