@@ -2,15 +2,15 @@
 class Skill
 {
   public $id ;
-  public $subdomain_id ;
+  public $domain_id ;
   public $name ;
   public $code ;
   public $trimester ;
   public $image ;
 
-  function __construct($id, $subdomain_id, $name, $code, $trimester, $image){
-    $this->id = $id ;
-    $this->subdomain_id = $subdomain_id ;
+  function __construct($id, $domain_id, $name, $code, $trimester, $image){
+    $this->id = $domain_id *100 + $id ;
+    $this->domain_id = $domain_id ;
     $this->name = $name ;
     $this->code = $code ;
     $this->trimester = $trimester ;

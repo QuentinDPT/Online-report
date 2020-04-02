@@ -42,4 +42,16 @@ class DomainController extends Model_Base
       return $ret ;
 		}
   }
+
+  public static function getByID($id){
+		$q  = self::$_db->prepare('SELECT * FROM '.DomainController::DOMAIN_TABLE.' WHERE domain_id = :id');
+	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
+	  $ok = $q->execute();
+
+		if ($ok)
+		{
+			$req = $q->fetch(PDO::FETCH_ASSOC);
+			return new Domain($req['Domain_ID'], $req['Name'], $req['Description'], $req['Color']) ;
+		}
+  }
 }

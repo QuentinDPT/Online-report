@@ -24,8 +24,8 @@ class SkillController extends Model_Base
 
   function __controller(){}
 
-  public static function getBySubdomainID($id){
-		$q  = self::$_db->prepare('SELECT * FROM '.SkillController::SUBDOMAIN_TABLE.' WHERE Subdomain_ID = :id');
+  public static function getByDomainID($id){
+		$q  = self::$_db->prepare('SELECT * FROM '.SkillController::SUBDOMAIN_TABLE.' WHERE Domain_ID = :id');
 	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
 	  $ok &= $q->execute();
 
@@ -35,11 +35,24 @@ class SkillController extends Model_Base
       do{
   			$req = $q->fetch(PDO::FETCH_ASSOC);
         if($req){
-          $subdomain = new Skill($req['Skill_ID'], $req['Subdomain_ID'], $req['Name'], $req['Code'], $req['Trimester'], $req['Image']) ;
+          $subdomain = new Skill($req['Skill_ID'], $req['Domain_ID'], $req['Name'], $req['Code'], $req['Trimester'], $req['Image']) ;
           array_push($ret, $subdomain) ;
         }
       }while($req) ;
       return $ret ;
+		}
+  }
+
+  public static function getByID($id){
+    $id = $id - ($id%100*100) ;
+		$q  = self::$_db->prepare('SELECT * FROM '.SkillController::SUBDOMAIN_TABLE.' WHERE skill_id = :id');
+	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
+	  $ok &= $q->execute();
+
+		if ($ok)
+		{
+      $req = $q->fetch(PDO::FETCH_ASSOC);
+      return new Skill($req['Skill_ID'], $req['Domain_ID'], $req['Name'], $req['Code'], $req['Trimester'], $req['Image']) ;
 		}
   }
 }
