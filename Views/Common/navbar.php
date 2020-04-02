@@ -15,9 +15,22 @@
       <li class="nav-item <?php echo ($NavActive != "class" ? "\" onclick=\"location.href='./ma-classe';" : "active" )?>">
         <div class="nav-link">Ma classe</div>
       </li>
+      <?php
+          if($User->_teacher == null){
+      ?>
+      <li class="nav-item <?php echo ($NavActive != "patent" ? "\" onclick=\"location.href='./brevets';" : "active" )?>">
+        <div class="nav-link">Brevets</div>
+      </li>
+      <?php
+          }else{
+      ?>
       <li class="nav-item <?php echo ($NavActive != "achievements" ? "\" onclick=\"location.href='./mes-reussites';" : "active" )?>">
         <div class="nav-link">Mes réussites</div>
       </li>
+      <?php
+          }
+      ?>
+
       <?php
         }
       ?>
@@ -25,8 +38,7 @@
     <?php
       if($User != null){
         echo '<div class="navbar-nav" ' . ($NavActive == "profile" ? "" : 'onclick="location.href = \'mon-profil\';"') . '>' ;
-        echo '  <div class="nav-link ' . ($NavActive != "profile" ? "" : "active") . '">' ;
-        echo $User->_name ;
+        echo '  <div class="nav-link ' . ($NavActive != "profile" ? "" : "active") . '">' . $User->_firstName . " " .  $User->_name ;
         echo '    <img class="rounded-circle" style="height:50px; width:50px;" src="' . $User->_avatar . '" alt="Avatar">' ;
         echo '  </div>' ;
         echo '</div>' ;

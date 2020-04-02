@@ -12,6 +12,8 @@ class User extends Model_Base
 	public $_name;
 	public $_firstName ;
 	public $_avatar ;
+	public $_teacher ;
+	public $_id ;
 
 	const USER_TABLE = "user";
 
@@ -44,10 +46,11 @@ class User extends Model_Base
 		if ($ok)
 		{
 			$user = $q->fetch(PDO::FETCH_ASSOC);
-			var_dump($user) ;
 			$this->_name = $user['Name'];
 			$this->_firstName = $user['Frist_Name'];
 			$this->_avatar = $user['Avatar'];
+			$this->_teacher = $user['TeacherId'] ;
+			$this->_id = $user['User_ID'] ;
 		}
 	}
 

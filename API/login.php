@@ -49,5 +49,10 @@ if ( !$user->exists() )
 $user->parseDB() ;
 
 $_SESSION['user'] = serialize($user);
-header('Location: ' . $LOCATION . '/acceuil');
+
+if($user->_password == ""){
+  header('Location: ' . $LOCATION . '/mot-de-passe');
+}else{
+  header('Location: ' . $LOCATION . '/acceuil');
+}
 exit;

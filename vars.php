@@ -7,7 +7,7 @@ $ROOT = dirname(dirname(__FILE__)) . "/www" ;
 $LOCATION = "http://localhost" ;
 
 // Application title
-$ApplicationName = "Ma classe" ;
+$ApplicationName = "La classe" ;
 $PageName = "" ;
 
 // Nav Active

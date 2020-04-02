@@ -7,11 +7,11 @@ if($User == null){
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
-    <?php $PageName = "Mes réussites" ?>
+    <?php $PageName = "Brevets" ?>
     <?php require("./Views/Common/header.php") ?>
   </head>
   <body>
-    <?php $NavActive = "achievements" ?>
+    <?php $NavActive = "patent" ?>
     <?php require("./Views/Common/navbar.php") ?>
   </body>
 </html>

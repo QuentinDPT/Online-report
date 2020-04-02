@@ -13,6 +13,13 @@ switch($URL){
   case "/connexion" :
     require("./Views/connection.php") ;
     die() ;
+}
+
+// URLs User Connected
+switch($URL){
+  case "/mot-de-passe" :
+    require("./Views/change-password.php") ;
+    die() ;
   case "/mon-profil" :
     require("./Views/profile.php") ;
     die() ;
@@ -21,6 +28,25 @@ switch($URL){
     die() ;
   case "/ma-classe" :
     require("./Views/class.php") ;
+    die() ;
+  case "/brevets" :
+    require("./Views/patent.php") ;
+    die() ;
+}
+
+// URLs Teacher Connected
+switch($URL){
+  case "/mon-profil" :
+    require("./Views/profile.php") ;
+    die() ;
+  case "/mes-reussites" :
+    require("./Views/achievements.php") ;
+    die() ;
+  case "/ma-classe" :
+    require("./Views/class.php") ;
+    die() ;
+  case "/brevets" :
+    require("./Views/patent.php") ;
     die() ;
 }
 
@@ -31,6 +57,9 @@ switch($URL){
     die() ;
   case "/api/logout" :
     require("./API/logout.php") ;
+    die() ;
+  case "/api/getClass" :
+    require("./API/getClass.php") ;
     die() ;
 }
 
