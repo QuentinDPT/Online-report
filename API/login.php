@@ -36,17 +36,18 @@ catch (PDOException $e)
 require_once $ROOT . '/Models/User.php';
 
 Model_Base::set_db( $db );
-$user = new User( $login, $password );
 //-----------------------------------------------------------------------------
 
-if ( !$user->exists() )
+require_once $ROOT . "/Controllers/UserController.php" ;
+$user = UserController::getUserByUsername($login) ;
+$user->password = $password ;
+
+if ( !UserController::log($user) )
 {
     $_SESSION['message'] = "Wrong login or password .";
     header('Location: ' . $LOCATION . '/connexion');
     exit;
 }
-
-$user->parseDB() ;
 
 $_SESSION['user'] = serialize($user);
 
