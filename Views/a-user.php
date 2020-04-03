@@ -65,13 +65,13 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         }
         ?>
       </div>
-      <h2>Donner une réussite</h2>
+      <h2>Autres réussites</h2>
       <div class="row overflow-auto">
         <?php
         if(count($SkillsUnacq) == 0){
           ?>
         <div class="col-md-4 col-sm-12 patent-container">
-          <p>Plus de réussites à donner</p>
+          <p>Plus d'autres réussites</p>
         </div>
           <?php
         }
