@@ -64,7 +64,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($User->id
         <?php
         if($SkillsUnacq == null || count($SkillsUnacq) == 0){
         ?>
-        <p>Plus de réussites à donner</p>
+        <p>Plus d'autres réussites</p>
         <?php
         }else{
           foreach ($SkillsUnacq as $i) {
