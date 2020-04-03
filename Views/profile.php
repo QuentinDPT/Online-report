@@ -21,7 +21,7 @@ if($User == null){
           <tr>
             <td>Nom d'utilisateur</td>
             <td>
-              <?php echo $User->_login ?>
+              <?php echo $User->login ?>
             </td>
           </tr>
           <tr>
@@ -39,7 +39,7 @@ if($User == null){
       </table>
 
       <?php
-      if($User->_teacher != null){
+      if($User->teacher != null){
 
       ?>
       <h3>Professeur</h3>
