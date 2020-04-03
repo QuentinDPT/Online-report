@@ -3,6 +3,7 @@ if($User == null){
   header('Location: ' . $LOCATION . '/connexion');
   exit() ;
 }
+
 if(!is_numeric($PatentId))
   return ;
 
@@ -12,14 +13,14 @@ if($patent->id == null)
   return ;
 
 require_once $ROOT . '/Controllers/DomainController.php' ;
-$domain = DomainController::getByID($PatentId%100) ;
+$domain = DomainController::getByID(($PatentId-($PatentId%100)) / 100) ;
 if($domain->id == null)
   return ;
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
-    <?php $PageName = "Brevet : " . $patent->id ?>
+    <?php $PageName = "Brevet " . $PatentId ?>
     <?php require("./Views/Common/header.php") ?>
   </head>
   <body>

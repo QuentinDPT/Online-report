@@ -67,6 +67,10 @@ switch($URL){
   case "/api/changeUserInfo" :
     require("./API/changeUserInfo.php") ;
     die() ;
+  case "/api/acquireSkill" :
+    header("Location: /utilisateur/eleve");
+    //require("./API/changeUserInfo.php") ;
+    die() ;
 }
 
 $URLHashed = explode('/',$URL) ;
