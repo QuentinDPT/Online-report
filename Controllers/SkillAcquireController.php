@@ -2,6 +2,7 @@
 require_once $ROOT . '/Models/AccessDB.php' ;
 require_once $ROOT . '/DBConfig.php';
 require_once $ROOT . '/Models/SkillAcquire.php';
+require_once $ROOT . '/Models/Skill.php';
 
 try
 {
@@ -56,6 +57,26 @@ class SkillAcquireController extends Model_Base
   			$req = $q->fetch(PDO::FETCH_ASSOC);
         if($req){
           $sa = new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate']) ;
+          array_push($ret, $sa) ;
+        }
+      }while($req) ;
+      return $ret ;
+		}
+  }
+
+
+  public static function getUnacquiredSkillFromStudentID($id){
+		$q  = self::$_db->prepare('SELECT * FROM '.'skill'.' WHERE Skill_ID Not in (select skill_id from skillacquire where Student_ID = :id)');
+	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
+	  $ok &= $q->execute();
+
+		if ($ok)
+		{
+      $ret = array() ;
+      do{
+  			$req = $q->fetch(PDO::FETCH_ASSOC);
+        if($req){
+          $sa = new Skill($req['Skill_ID'], $req['Domain_ID'], $req['Name'], $req['Code'], $req['Trimester'], $req['Image']) ;
           array_push($ret, $sa) ;
         }
       }while($req) ;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : hi5bu.myd.infomaniak.com
--- Généré le :  mer. 01 avr. 2020 à 12:43
--- Version du serveur :  5.7.27-log
--- Version de PHP :  7.2.29
+-- Hôte : 127.0.0.1:3308
+-- Généré le :  ven. 03 avr. 2020 à 08:00
+-- Version du serveur :  8.0.18
+-- Version de PHP :  7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,203 +25,134 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Domain`
+-- Structure de la table `domain`
 --
 
-CREATE TABLE `Domain` (
-  `Domain_ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `domain`;
+CREATE TABLE IF NOT EXISTS `domain` (
+  `Domain_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `Description` text,
-  `Color` varchar(7) NOT NULL DEFAULT '#FFFFFF'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Color` varchar(7) NOT NULL DEFAULT '#FFFFFF',
+  PRIMARY KEY (`Domain_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `domain`
+--
+
+INSERT INTO `domain` (`Domain_ID`, `Name`, `Description`, `Color`) VALUES
+(3, 'Apprendre ensemble pour vivre ensemble', NULL, '#FFFFFF');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Skill`
+-- Structure de la table `skill`
 --
 
-CREATE TABLE `Skill` (
-  `Skill_ID` int(11) NOT NULL,
-  `Subdomain_ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `skill`;
+CREATE TABLE IF NOT EXISTS `skill` (
+  `Skill_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Domain_ID` int(11) NOT NULL,
   `Name` varchar(255) NOT NULL,
-  `Code` int(11) NOT NULL,
+  `Code` int(11) DEFAULT NULL,
   `Trimester` int(11) NOT NULL,
-  `Image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Image` varchar(255) NOT NULL,
+  PRIMARY KEY (`Skill_ID`),
+  UNIQUE KEY `Code` (`Code`),
+  KEY `FK_Domain` (`Domain_ID`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `skill`
+--
+
+INSERT INTO `skill` (`Skill_ID`, `Domain_ID`, `Name`, `Code`, `Trimester`, `Image`) VALUES
+(6, 3, 'Je pose mon manteau à mon crochet', 1, 1, 'http://laclasse.depotter.fr/src/img/brevets/1.png');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `SkillAcquire`
+-- Structure de la table `skillacquire`
 --
 
-CREATE TABLE `SkillAcquire` (
-  `SkillAcq_ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `skillacquire`;
+CREATE TABLE IF NOT EXISTS `skillacquire` (
+  `SkillAcq_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Student_ID` int(11) NOT NULL,
   `Skill_ID` int(11) NOT NULL,
-  `Trimester` int(11) NOT NULL,
+  `ObsDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Note` varchar(255) DEFAULT NULL,
-  `Status` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Status` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`SkillAcq_ID`),
+  KEY `FK_Skill` (`Skill_ID`),
+  KEY `FK_Student` (`Student_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `skillacquire`
+--
+
+INSERT INTO `skillacquire` (`SkillAcq_ID`, `Student_ID`, `Skill_ID`, `ObsDate`, `Note`, `Status`) VALUES
+(1, 27, 6, '2020-04-03 09:48:30', 'Quentin y arrive très bien', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Student`
+-- Structure de la table `user`
 --
 
-CREATE TABLE `Student` (
-  `Student_ID` int(11) NOT NULL,
-  `Teacher_ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `User_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Teacher_ID` int(11) DEFAULT NULL,
   `Name` varchar(63) NOT NULL,
   `Frist_Name` varchar(63) NOT NULL,
-  `Avatar` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Avatar` varchar(255) DEFAULT NULL,
+  `Login` varchar(100) NOT NULL,
+  `Password` varchar(64) NOT NULL,
+  PRIMARY KEY (`User_ID`),
+  KEY `FK_Teacher` (`Teacher_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`User_ID`, `Teacher_ID`, `Name`, `Frist_Name`, `Avatar`, `Login`, `Password`) VALUES
+(2, NULL, 'de Potter', 'Blandine', 'https://cdn.pixabay.com/photo/2018/04/18/18/56/user-3331256__340.png', 'blandine', '$2y$10$MAntk6mStcWUX9yVRlZ26uKM49wP.Zl8fVwOEN.xfkv8z6XIASl32'),
+(27, 2, 'de Potter', 'Quentin', 'https://images.radio-canada.ca/q_auto,w_1250/v1/ici-info/16x9/eleve-primaire-hausse-ontario.jpg', 'eleve', '$2y$10$MAntk6mStcWUX9yVRlZ26uKM49wP.Zl8fVwOEN.xfkv8z6XIASl32');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Subdomain`
+-- Structure de la vue `v_skillacquire`
 --
-
-CREATE TABLE `Subdomain` (
-  `Subdomain_ID` int(11) NOT NULL,
-  `Domain_ID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Description` text,
-  `Code` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Teacher`
---
-
-CREATE TABLE `Teacher` (
-  `Teacher_ID` int(11) NOT NULL,
-  `Name` varchar(63) NOT NULL,
-  `UserName` varchar(255) NOT NULL,
-  `Passwd` varchar(255) NOT NULL,
-  `Avatar` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `Domain`
---
-ALTER TABLE `Domain`
-  ADD PRIMARY KEY (`Domain_ID`);
-
---
--- Index pour la table `Skill`
---
-ALTER TABLE `Skill`
-  ADD PRIMARY KEY (`Skill_ID`),
-  ADD UNIQUE KEY `Code` (`Code`),
-  ADD KEY `FK_Subdomain` (`Subdomain_ID`);
-
---
--- Index pour la table `SkillAcquire`
---
-ALTER TABLE `SkillAcquire`
-  ADD PRIMARY KEY (`SkillAcq_ID`),
-  ADD KEY `FK_Skill` (`Skill_ID`),
-  ADD KEY `FK_Student` (`Student_ID`);
-
---
--- Index pour la table `Student`
---
-ALTER TABLE `Student`
-  ADD PRIMARY KEY (`Student_ID`),
-  ADD KEY `FK_Teacher` (`Teacher_ID`);
-
---
--- Index pour la table `Subdomain`
---
-ALTER TABLE `Subdomain`
-  ADD PRIMARY KEY (`Subdomain_ID`),
-  ADD UNIQUE KEY `Code` (`Code`),
-  ADD KEY `FK_Domain` (`Domain_ID`);
-
---
--- Index pour la table `Teacher`
---
-ALTER TABLE `Teacher`
-  ADD PRIMARY KEY (`Teacher_ID`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `Domain`
---
-ALTER TABLE `Domain`
-  MODIFY `Domain_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Skill`
---
-ALTER TABLE `Skill`
-  MODIFY `Skill_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `SkillAcquire`
---
-ALTER TABLE `SkillAcquire`
-  MODIFY `SkillAcq_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Student`
---
-ALTER TABLE `Student`
-  MODIFY `Student_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Subdomain`
---
-ALTER TABLE `Subdomain`
-  MODIFY `Subdomain_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Teacher`
---
-ALTER TABLE `Teacher`
-  MODIFY `Teacher_ID` int(11) NOT NULL AUTO_INCREMENT;
+CREATE VIEW `v_skillacquire` AS
+select `s`.`Skill_ID` AS `Skill_ID`,`sa`.`Student_ID` AS `Student_ID`,`s`.`Code` AS `Code`,`s`.`Name` AS `Name`,`s`.`Image` AS `Image`,`s`.`Trimester` AS `Trimester`,`s`.`Domain_ID` AS `Domain_ID`,`sa`.`Note` AS `Note`,`sa`.`Status` AS `Status`,`sa`.`ObsDate` AS `ObsDate` from `skill` `s` natural join `skillacquire` `sa` ;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `Skill`
+-- Contraintes pour la table `skill`
 --
-ALTER TABLE `Skill`
-  ADD CONSTRAINT `FK_Subdomain` FOREIGN KEY (`Subdomain_ID`) REFERENCES `Subdomain` (`Subdomain_ID`);
+ALTER TABLE `skill`
+  ADD CONSTRAINT `FK_Domain` FOREIGN KEY (`Domain_ID`) REFERENCES `domain` (`Domain_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Contraintes pour la table `SkillAcquire`
+-- Contraintes pour la table `skillacquire`
 --
-ALTER TABLE `SkillAcquire`
-  ADD CONSTRAINT `FK_Skill` FOREIGN KEY (`Skill_ID`) REFERENCES `Skill` (`Skill_ID`),
-  ADD CONSTRAINT `FK_Student` FOREIGN KEY (`Student_ID`) REFERENCES `Student` (`Student_ID`);
+ALTER TABLE `skillacquire`
+  ADD CONSTRAINT `FK_Skill` FOREIGN KEY (`Skill_ID`) REFERENCES `skill` (`Skill_ID`),
+  ADD CONSTRAINT `FK_Student` FOREIGN KEY (`Student_ID`) REFERENCES `user` (`User_ID`);
 
 --
--- Contraintes pour la table `Student`
+-- Contraintes pour la table `user`
 --
-ALTER TABLE `Student`
-  ADD CONSTRAINT `FK_Teacher` FOREIGN KEY (`Teacher_ID`) REFERENCES `Teacher` (`Teacher_ID`);
-
---
--- Contraintes pour la table `Subdomain`
---
-ALTER TABLE `Subdomain`
-  ADD CONSTRAINT `FK_Domain` FOREIGN KEY (`Domain_ID`) REFERENCES `Domain` (`Domain_ID`);
+ALTER TABLE `user`
+  ADD CONSTRAINT `FK_Teacher` FOREIGN KEY (`Teacher_ID`) REFERENCES `user` (`User_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

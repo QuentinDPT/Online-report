@@ -40,10 +40,11 @@ if($User == null){
 
       <?php
       if($User->teacher != null){
-
+        require_once $ROOT . "/Controllers/UserController.php" ;
+        $teacher = UserController::getUserById($User->teacher) ;
       ?>
       <h3>Professeur</h3>
-      <p>Nom Prénom</p>
+      <p><?php echo $teacher->toHTML() ?></p>
       <?php
       }
       ?>

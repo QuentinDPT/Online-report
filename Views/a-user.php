@@ -9,11 +9,8 @@ $Usr = UserController::getUserByUsername($UserName) ;
 
 require_once $ROOT . '/Controllers/SkillAcquireController.php' ;
 $Skills = SkillAcquireController::getSkillAcquireByStudentID($Usr->id) ;
-var_dump($Skills) ;
-
 $SkillsObs = SkillAcquireController::getSkillObsByStudentID($Usr->id) ;
-var_dump($SkillsObs) ;
-
+$SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id) ;
 ?>
 
 <!DOCTYPE html>
@@ -27,22 +24,66 @@ var_dump($SkillsObs) ;
     <?php require("./Views/Common/navbar.php") ?>
     <div class="container-lg">
       <h2>Mes réussites</h2>
-      <div class="row">
-        <div class="col-md-4 col-sm-12">
-
+      <div class="row overflow-auto">
+        <?php
+        if(count($Skills) == 0){
+          ?>
+        <div class="col-md-4 col-sm-12 text-center patent-container">
+          <p>Pas encore de réussites</p>
         </div>
+          <?php
+        }
+        foreach ($Skills as $i) {
+        ?>
+        <div class="col-md-4 col-sm-12 text-center patent-container">
+          <img src="<?= $i->image ?>">
+          <p><?= $i->name ?></p>
+          <p><?= $i->note . " " . $i->status ?></p>
+        </div>
+        <?php
+        }
+        ?>
       </div>
       <h2>Réussites en cours</h2>
-      <div class="row">
-        <div class="col-md-4 col-sm-12">
-
+      <div class="row overflow-auto">
+        <?php
+        if(count($SkillsObs) == 0){
+          ?>
+        <div class="col-md-4 col-sm-12 text-center patent-container">
+          <p>Pas de réussites en cours</p>
         </div>
+          <?php
+        }
+        foreach ($SkillsObs as $i) {
+        ?>
+        <div class="col-md-4 col-sm-12 text-center patent-container">
+          <img src="<?= $i->image ?>">
+          <p><?= $i->name ?></p>
+          <p><?= $i->note . " " . $i->status ?></p>
+        </div>
+        <?php
+        }
+        ?>
       </div>
       <h2>Donner une réussite</h2>
-      <div class="row">
-        <div class="col-md-4 col-sm-12">
-
+      <div class="row overflow-auto">
+        <?php
+        if(count($SkillsUnacq) == 0){
+          ?>
+        <div class="col-md-4 col-sm-12 patent-container">
+          <p>Plus de réussites à donner</p>
         </div>
+          <?php
+        }
+        foreach ($SkillsUnacq as $i) {
+        ?>
+        <div class="col-md-4 col-sm-12 text-center">
+          <img src="<?= $i->image ?>">
+          <p><?= $i->name ?></p>
+        </div>
+        <?php
+        }
+        ?>
       </div>
     </div>
   </body>

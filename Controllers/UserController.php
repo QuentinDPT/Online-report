@@ -59,6 +59,26 @@ class UserController extends Model_Base
 		}
   }
 
+  public static function getUserById($UserId){
+		$q = self::$_db->prepare('SELECT * FROM '.UserController::USER_TABLE.' WHERE User_ID = :id');
+	  $ok  = $q->bindValue(':id', $UserId, PDO::PARAM_STR);
+	  $ok &= $q->execute();
+
+		if ($ok)
+		{
+			$req = $q->fetch(PDO::FETCH_ASSOC);
+      return new User(
+        $req['User_ID'],
+        $req['Teacher_ID'],
+        $req['Name'],
+        $req['Frist_Name'],
+        $req['Avatar'],
+        $req['Login'],
+        $req['Password']
+      ) ;
+		}
+  }
+
 	public static function create($User)
 	{
 		$q = self::$_db->prepare('INSERT INTO '.USER::USER_TABLE.' SET login = :login, password=:password');
@@ -83,10 +103,10 @@ class UserController extends Model_Base
 			$User->password = $newpassword;
 	}
 
-	public static function delete($User)
+	public static function delete($UserLogin)
 	{
 		$q = self::$_db->prepare('DELETE FROM '.USER::USER_TABLE.' WHERE login = :login');
-		$ok =  $q->bindValue(':login', $User->login, PDO::PARAM_STR);
+		$ok =  $q->bindValue(':login', $UserLogin, PDO::PARAM_STR);
 		$ok &= $q->execute();
 
 		if ( !$ok )
