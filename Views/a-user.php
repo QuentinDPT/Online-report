@@ -28,9 +28,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         <?php
         if(count($Skills) == 0){
           ?>
-        <div class="col-md-4 col-sm-12 text-center patent-container">
           <p>Pas encore de réussites</p>
-        </div>
           <?php
         }
         foreach ($Skills as $i) {
@@ -49,9 +47,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         <?php
         if(count($SkillsObs) == 0){
           ?>
-        <div class="col-md-4 col-sm-12 text-center patent-container">
           <p>Pas de réussites en cours</p>
-        </div>
           <?php
         }
         foreach ($SkillsObs as $i) {
@@ -65,13 +61,13 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         }
         ?>
       </div>
-      <h2>Autres réussites</h2>
+      <h2>Donner une réussite</h2>
       <div class="row overflow-auto">
         <?php
         if(count($SkillsUnacq) == 0){
           ?>
         <div class="col-md-4 col-sm-12 patent-container">
-          <p>Plus d'autres réussites</p>
+          <p>Plus de nouvelles réussites</p>
         </div>
           <?php
         }
