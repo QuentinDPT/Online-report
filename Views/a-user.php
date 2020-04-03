@@ -18,6 +18,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
   <head>
     <?php $PageName = $Usr->firstName ?>
     <?php require("./Views/Common/header.php") ?>
+    <script src="/src/scripts/addPatent.js"></script>
   </head>
   <body>
     <?php $NavActive = "user" ?>
@@ -33,7 +34,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         }else{
           foreach ($Skills as $i) {
         ?>
-        <div class="col-md-4 col-sm-12 text-center patent-container">
+        <div class="col-md-4 col-sm-12 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentModifyClick(<?= $i->id ?>)">
           <img src="<?= $i->image ?>">
           <p><?= $i->name ?></p>
           <p><?= $i->note . " " . $i->status ?></p>
@@ -53,7 +54,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         }else{
           foreach ($SkillsObs as $i) {
         ?>
-        <div class="col-md-4 col-sm-12 text-center patent-container">
+        <div class="col-md-4 col-sm-12 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentModifyClick(<?= $i->id ?>)">
           <img src="<?= $i->image ?>">
           <p><?= $i->name ?></p>
           <p><?= $i->note . " " . $i->status ?></p>
@@ -73,7 +74,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         }else{
           foreach ($SkillsUnacq as $i) {
         ?>
-        <div class="col-md-4 col-sm-12 text-center">
+        <div class="col-md-4 col-sm-12 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentAddClick(<?= $i->id ?>)">
           <img src="<?= $i->image ?>">
           <p><?= $i->name ?></p>
         </div>
