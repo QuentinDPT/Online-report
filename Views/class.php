@@ -22,11 +22,18 @@ if($User == null){
         <?php
         foreach($Class->students as $i ){
         ?>
+        <?php
+        if($User->teacher == null){
+        ?>
         <li class="d-block w-100" style="height: 50px ;" onclick="location.href='./utilisateur/<?php echo $i->login ?>';">
-          <div class="d-inline-block text-center" style="height: 50px ;">
-            <?php echo $i->avatar != "" ? "<img class='rounded-circle' style='height:50px ; width:50px ;' src='" . $i->avatar . "'>" : "<i style='display:inline-block; height:50px ; width:50px ;vertical-align: middle;'></i>" ?>
-            <?php echo $i->firstName ?> <?php echo $i->name ?>
-          </div>
+        <?php
+        }else{
+        ?>
+        <li class="d-block w-100" style="height: 50px ;">
+        <?php
+        }
+        echo $i->toHTML() ;
+        ?>
         </li>
         <?php
         }

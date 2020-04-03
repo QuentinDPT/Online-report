@@ -19,4 +19,12 @@ class User
 		$this->login		= $login;
 		$this->password	= $password;
 	}
+
+	public function toHTML(){
+		return
+			'<div class="d-inline-block text-center" style="height: 50px ;">' .
+				($this->avatar != "" ? "<img class='rounded-circle' style='height:50px ; width:50px ;' src='" . $this->avatar . "'>" : "<i style='display:inline-block; height:50px ; width:50px ;vertical-align: middle;'></i>") .
+				$this->firstName . " " . $this->name .
+			'</div>' ;
+	}
 }
