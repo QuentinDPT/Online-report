@@ -24,7 +24,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
     <?php require("./Views/Common/navbar.php") ?>
     <div class="container-lg">
       <h2>Mes réussites</h2>
-      <div class="row overflow-auto">
+      <div class="d-flex overflow-auto">
         <?php
         if($Skills == null || count($Skills) == 0){
         ?>
@@ -44,7 +44,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         ?>
       </div>
       <h2>Réussites en cours</h2>
-      <div class="row overflow-auto">
+      <div class="d-flex overflow-auto">
         <?php
         if($SkillsObs == null || count($SkillsObs) == 0){
         ?>
@@ -64,7 +64,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         ?>
       </div>
       <h2>Donner une réussite</h2>
-      <div class="row overflow-auto">
+      <div class="d-flex overflow-auto">
         <?php
         if($SkillsUnacq == null || count($SkillsUnacq) == 0){
         ?>
