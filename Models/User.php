@@ -23,8 +23,8 @@ class User
 	public function toHTML(){
 		return
 			'<div class="d-inline-block text-center" style="height: 50px ;">' .
-				($this->avatar != "" ? "<img class='rounded-circle' style='height:50px ; width:50px ;' src='" . $this->avatar . "'>" : "<i style='display:inline-block; height:50px ; width:50px ;vertical-align: middle;'></i>") .
-				$this->firstName . " " . $this->name .
+				($this->avatar != "" ? "<img class='rounded-circle mr-2' style='height:50px ; width:50px ;' src='" . $this->avatar . "'>" : "<i style='display:inline-block; height:50px ; width:50px ;vertical-align: middle;'></i>") .
+				$this->firstName . " <span class='font-weight-bold'>" . $this->name . "</span>" .
 			'</div>' ;
 	}
 }

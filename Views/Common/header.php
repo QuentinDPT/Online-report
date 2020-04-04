@@ -8,3 +8,13 @@
 <script src="/src/lib/JQuery-3.4.1/JQuery.min.js"></script>
 <script src="/src/lib/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js"></script>
 <script src="/src/lib/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+<style>
+  @font-face {
+    font-family: siteFont;
+    src: url("http://localhost/src/font.ttf");
+  }
+
+  body{
+    font-family: siteFont ;
+  }
+</style>
