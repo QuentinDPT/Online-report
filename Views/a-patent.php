@@ -38,7 +38,6 @@ if($domain->id == null)
         <div class="d-inline-flex justify-content-between w-100" style="height: 50px ;">
           <?=$i->toHTML() ; ?>
           <div class="d-flex justify-content-end align-items-center">
-            <input type="text" class="form-control" placeholder="Observations">
             <input type="button" class="btn btn-outline-secondary" id='p<?= $i->id ?>' value="👍" onclick="(document.getElementById('p<?= $i->id ?>').value == '👍' ? document.getElementById('p<?= $i->id ?>').value = '👁' : document.getElementById('p<?= $i->id ?>').value == '👁' ? document.getElementById('p<?= $i->id ?>').value = '👎' : document.getElementById('p<?= $i->id ?>').value = '👍')">
           </div>
         </div>
