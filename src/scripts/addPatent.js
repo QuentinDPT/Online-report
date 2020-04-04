@@ -40,8 +40,8 @@ function createForm(name){
           <input type="button" class="btn btn-outline-light" id='obs' value="✔️" onclick="(document.getElementById('obs').value == '✔️' ? document.getElementById('obs').value = '❌' : document.getElementById('obs').value = '✔️')">
         </div>
       </div>
-      <div class="row" style="margin-bottom: .5rem;">
-        <textarea class="form-control" style="max-height:37vh ; height:27vh ;" placeholder="Description"></textarea>
+      <div class="row" style="height:100%; margin-bottom: .5rem;">
+        <textarea class="form-control" style="max-height:100% ; height:100% ;" placeholder="Description"></textarea>
       </div>
       <div class="row">
         <input type="submit" class="btn btn-primary col-md-6 col-sm-12" value="Valider" onclick="loadingElement.style = 'display:none' ;">
@@ -73,6 +73,9 @@ window.onload = function(){
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
+      display: flex;
+      flex-direction: column ;
+      justify-content: space-between ;
     }
 
     #loading>*>*{
