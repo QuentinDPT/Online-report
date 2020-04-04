@@ -25,7 +25,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
         foreach($Domains as $i){
         ?>
         {
-          text: "<?= $i->name ?>",
+          text: "<span class='font-weight-bold text-uppercase'><?= $i->name ?></span>",
           backColor: '<?= $i->color ?>55',
           selectable: false,
           nodes: [
@@ -34,7 +34,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
             foreach($Skills as $j) {
             ?>
             {
-              text: "<?= $j->name ?>",
+              text: "<img class='rounded-circle mr-2' style='height:50px; width:50px' src='<?= $j->image ?>'><?= $j->name ?>",
               backColor: '<?= $i->color ?>1C',
               selectable: true,
               skillId: <?= $j->display_id ?>,

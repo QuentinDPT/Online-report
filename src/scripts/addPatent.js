@@ -41,7 +41,7 @@ function createForm(name){
         </div>
       </div>
       <div class="row" style="height:100%; margin-bottom: .5rem;">
-        <textarea class="form-control" style="max-height:100% ; height:100% ;" placeholder="Description"></textarea>
+        <textarea class="form-control" style="max-height:100% ; height:100% ;" placeholder="Mémo"></textarea>
       </div>
       <div class="row">
         <input type="submit" class="btn btn-primary col-md-6 col-sm-12" value="Valider" onclick="loadingElement.style = 'display:none' ;">
