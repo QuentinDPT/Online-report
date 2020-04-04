@@ -34,7 +34,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
             foreach($Skills as $j) {
             ?>
             {
-              text: "<img class='rounded-circle mr-2' style='height:50px; width:50px' src='<?= $j->image ?>'><?= $j->name ?>",
+              text: "<span class='d-flex align-items-center'><img class='rounded-circle mr-3' style='height:50px; width:50px' src='<?= $j->image ?>'><p class='m-0'><?= $j->name ?></p></span>",
               backColor: '<?= $i->color ?>1C',
               selectable: true,
               skillId: <?= $j->display_id ?>,
