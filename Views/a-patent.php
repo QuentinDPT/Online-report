@@ -31,21 +31,25 @@ if($domain->id == null)
         require_once $ROOT . "/Controllers/ClassController.php" ;
         $Class = ClassroomController::getClassByTeacherId($User->teacher == null ? $User->id : $User->teacher) ;
       ?>
-      <ul>
+      <div class="row">
         <?php
         foreach($Class->students as $i ){
         ?>
-        <li class="d-inline-flex justify-content-between w-100" style="height: 50px ;">
+        <div class="d-inline-flex justify-content-between w-100" style="height: 50px ;">
           <?=$i->toHTML() ; ?>
-          <div>
-            <input type="button" class="btn btn-outline-secondary" id='p<?= $i->id ?>' value="Obtenu ✔️" onclick="(document.getElementById('p<?= $i->id ?>').value == 'Obtenu ✔️' ? document.getElementById('p<?= $i->id ?>').value = 'Non obtenu ❌' : document.getElementById('p<?= $i->id ?>').value = 'Obtenu ✔️')">
-            <input type="button" class="btn btn-outline-primary" name="" value="voir" onclick="location.href='/utilisateur/<?= $i->login ?>';">
+          <div class="d-flex justify-content-end align-items-center">
+            <input type="text" class="form-control" placeholder="Observations">
+            <input type="button" class="btn btn-outline-secondary" id='p<?= $i->id ?>' value="👍" onclick="(document.getElementById('p<?= $i->id ?>').value == '👍' ? document.getElementById('p<?= $i->id ?>').value = '👁' : document.getElementById('p<?= $i->id ?>').value == '👁' ? document.getElementById('p<?= $i->id ?>').value = '👎' : document.getElementById('p<?= $i->id ?>').value = '👍')">
           </div>
-        </li>
+        </div>
         <?php
         }
         ?>
-      </ul>
+      </div>
+      <div class="row">
+        <div class="col-sm-0 col-md-9"></div>
+        <input type="button" class="btn btn-primary col-sm-12 col-md-3" value="Valider les modifications">
+      </div>
     </div>
   </body>
 </html>
