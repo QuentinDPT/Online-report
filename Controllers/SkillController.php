@@ -44,9 +44,21 @@ class SkillController extends Model_Base
   }
 
   public static function getByID($id){
-    $id = $id - ($id%100*100) ;
 		$q  = self::$_db->prepare('SELECT * FROM '.SkillController::SUBDOMAIN_TABLE.' WHERE skill_id = :id');
 	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
+	  $ok &= $q->execute();
+
+		if ($ok)
+		{
+      $req = $q->fetch(PDO::FETCH_ASSOC);
+      return new Skill($req['Skill_ID'], $req['Domain_ID'], $req['Name'], $req['Code'], $req['Trimester'], $req['Image']) ;
+		}
+  }
+
+  public static function getByDomainAndCode($domainId, $codeId){
+		$q  = self::$_db->prepare('SELECT * FROM '.SkillController::SUBDOMAIN_TABLE.' WHERE Domain_ID = :did and Code = :cid');
+	  $ok  = $q->bindValue(':did', $domainId, PDO::PARAM_STR);
+	  $ok &= $q->bindValue(':cid', $codeId, PDO::PARAM_STR);
 	  $ok &= $q->execute();
 
 		if ($ok)

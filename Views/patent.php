@@ -37,6 +37,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
               text: "<?= $j->name ?>",
               backColor: '<?= $i->color ?>1C',
               selectable: true,
+              skillId: <?= $j->display_id ?>,
             },
             <?php
             }
@@ -58,7 +59,13 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
     <script type="text/javascript">
       $('#treeview1').treeview({
         levels: 1,
-        data: defaultData
+        data: defaultData,
+        selectedBackColor: "#FFF",
+        selectedColor: "#000",
+        onNodeSelected: function(event, node) {
+          window.location.href = "/brevet/" + node.skillId;
+          console.log(node.skillId);
+        }
       });
     </script>
   </body>

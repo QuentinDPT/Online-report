@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky fixed-top mb-3">
   <a class="navbar-brand" style="min-width:150px" href="/"><?php echo $PageName ?></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
