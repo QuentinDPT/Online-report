@@ -11,8 +11,9 @@ class SkillAcquire
   public $note ;
   public $status ;
   public $obsdate ;
+  public $nbobs ;
 
-  function __construct($id, $student_id, $code, $name, $image, $trimester, $domain_id, $note, $status, $obsdate){
+  function __construct($id, $student_id, $code, $name, $image, $trimester, $domain_id, $note, $status, $obsdate, $nbobs){
     $this->id         = $id ;
     $this->student_id = $student_id ;
     $this->code       = $code ;
@@ -23,5 +24,27 @@ class SkillAcquire
     $this->note       = $note ;
     $this->status     = $status ;
     $this->obsdate    = $obsdate ;
+    $this->nbobs      = $nbobs ;
+  }
+
+  public function getIcon(){
+      switch($this->status){
+        case 1:
+          return "👍" ;
+        case 2:
+          $rez = "" ;
+          if($this->nbobs <= 3){
+            for($_i = 0 ; $_i<$this->nbobs ;$_i++){
+              $rez = $rez . "👁" ;
+            }
+          }else{
+            $rez = "👁 x" . $this->nbobs ;
+          }
+          return $rez ;
+        case 3:
+          return "👎" ;
+        default:
+          return "" ;
+      }
   }
 }

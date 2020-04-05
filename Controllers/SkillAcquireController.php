@@ -25,6 +25,18 @@ class SkillAcquireController extends Model_Base
 
   function __controller(){}
 
+  public static function getSkillAcquireBySkillID($id){
+		$q  = self::$_db->prepare('SELECT * FROM '.SkillAcquireController::SKILLACQUIRE_TABLE.' WHERE Skill_ID = :id Limit 1');
+	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
+	  $ok &= $q->execute();
+
+		if ($ok)
+		{
+			$req = $q->fetch(PDO::FETCH_ASSOC);
+      return new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
+		}
+  }
+
   public static function getSkillAcquireByStudentID($id){
 		$q  = self::$_db->prepare('SELECT * FROM '.SkillAcquireController::SKILLACQUIRE_TABLE.' WHERE Student_ID = :id AND Status = 1');
 	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
@@ -36,7 +48,7 @@ class SkillAcquireController extends Model_Base
       do{
   			$req = $q->fetch(PDO::FETCH_ASSOC);
         if($req){
-          $sa = new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate']) ;
+          $sa = new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
           array_push($ret, $sa) ;
         }
       }while($req) ;
@@ -56,7 +68,7 @@ class SkillAcquireController extends Model_Base
       do{
   			$req = $q->fetch(PDO::FETCH_ASSOC);
         if($req){
-          $sa = new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate']) ;
+          $sa = new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
           array_push($ret, $sa) ;
         }
       }while($req) ;

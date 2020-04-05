@@ -11,10 +11,15 @@
 <style>
   @font-face {
     font-family: siteFont;
-    src: url("http://localhost/src/font.ttf");
+    src: url(<?= $LOCATION ?>"/src/font.ttf");
   }
 
   body{
-    font-family: siteFont ;
+    /*font-family: siteFont ;*/
   }
+</style>
+<style type="text/css" media="print">
+  @page { size: auto;  margin: 0mm; }
+
+  @media print{@page {size: landscape}}
 </style>
