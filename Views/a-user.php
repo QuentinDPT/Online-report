@@ -11,6 +11,9 @@ require_once $ROOT . '/Controllers/SkillAcquireController.php' ;
 $Skills = SkillAcquireController::getSkillAcquireByStudentID($Usr->id) ;
 $SkillsObs = SkillAcquireController::getSkillObsByStudentID($Usr->id) ;
 $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id) ;
+
+require_once $ROOT . '/Controllers/DomainController.php' ;
+require_once $ROOT . '/Controllers/SkillController.php' ;
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +26,7 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
   <body>
     <?php $NavActive = "user" ?>
     <?php require("./Views/Common/navbar.php") ?>
-    <div class="container-lg">
+    <div class="container-lg d-print-none">
       <h2>Mes réussites</h2>
       <div class="d-flex overflow-auto">
         <?php
@@ -83,6 +86,53 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
         }
         ?>
       </div>
+    </div>
+    <div class="d-none d-print-block">
+      <table class="w-100 table">
+        <thead>
+          <tr>
+            <th class="font-weight-bold h1"><?= $Usr->firstName ?></th>
+          </tr>
+        </thead>
+          <tbody>
+          <?php
+          $Domains = DomainController::getAll() ;
+          foreach($Domains as $i){
+          ?>
+          <tr style="page-break-before: always">
+            <th class="h2 text-center" scope="col"><?= $i->name ?></th>
+          </tr>
+          <tr>
+            <td>
+              <table class="w-100">
+                <tbody>
+                  <?php
+                    $Skills = SkillController::getByDomainID($i->id);
+                    foreach($Skills as $j) {
+                  ?>
+                  <tr>
+                    <td><?= $j->name ?></td>
+                    <td>
+                      <?php
+                      $res = SkillAcquireController::getSkillAcquireBySkillID($j->id) ;
+                      if($res != null && $res->id != null){
+                        echo $res->getIcon() ;
+                      }
+                      ?>
+                    </td>
+                  </tr>
+                  <?php
+                    }
+                  ?>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <?php
+          }
+          ?>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
