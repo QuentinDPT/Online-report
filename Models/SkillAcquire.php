@@ -2,6 +2,7 @@
 class SkillAcquire
 {
   public $id ;
+  public $skill_id ;
   public $student_id ;
   public $code ;
   public $name ;
@@ -13,7 +14,7 @@ class SkillAcquire
   public $obsdate ;
   public $nbobs ;
 
-  function __construct($id, $student_id, $code, $name, $image, $trimester, $domain_id, $note, $status, $obsdate, $nbobs){
+  function __construct($id, $skill_id, $student_id, $code, $name, $image, $trimester, $domain_id, $note, $status, $obsdate, $nbobs){
     $this->id         = $id ;
     $this->student_id = $student_id ;
     $this->code       = $code ;
@@ -48,13 +49,13 @@ class SkillAcquire
       }
   }
 
-  public static function getHTML_Button($status, $nbobs, $id){
+  public static function getHTML_Button($status, $nbobs, $uid, $ptId){
     return
-      '<input type="button" class="btn btn-outline-light" value="---" id="patent-obs-'.$id.'" status="'.$nbobs.'" onclick=\'btnobs('.$id.');\' />'.
-      '<input type="button" class="btn btn-outline-light" value="-" id="patent-rw-'.$id.'" status="'.$status.'" onclick=\'btnreview('.$id.');\' />'.
+      '<input type="button" class="btn btn-outline-light" value="---" id="patent-obs-'.$uid.'" status="'.$nbobs.'" UID="'.$uid.'" ptid="'.$ptId.'" onclick=\'btnobs('.$uid.');\' />'.
+      '<input type="button" class="btn btn-outline-light" value="-" id="patent-rw-'.$uid.'" status="'.$status.'" UID="'.$uid.'" ptid="'.$ptId.'" onclick=\'btnreview('.$uid.');\' />'.
       '<script>'.
-      ' document.getElementById("patent-obs-'.$id.'").value = CodeToEmoji(0,'.$nbobs.');'.
-      ' document.getElementById("patent-rw-' .$id.'").value = CodeToEmoji('.$status.');'.
+      ' document.getElementById("patent-obs-'.$uid.'").value = CodeToEmoji(0,'.$nbobs.');'.
+      ' document.getElementById("patent-rw-' .$uid.'").value = CodeToEmoji('.$status.');'.
       '</script>' ;
   }
 }

@@ -42,13 +42,13 @@ if($domain->id == null)
         foreach($Class->students as $i ){
           $stored = SkillAcquireController::getSkillAcquireByStudentIDAndPatent($i->id, $patent->id) ;
           if($stored == null){
-            $stored = new SkillAcquire(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) ;
+            $stored = new SkillAcquire(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) ;
           }
         ?>
         <div class="d-inline-flex justify-content-between w-100" style="height: 50px ;">
           <?= $i->toHTML() ; ?>
           <div class="d-flex justify-content-end col-4 col-md-2 align-items-center">
-            <?= SkillAcquire::getHTML_Button($stored->status,$stored->nbobs,$i->id) ?>
+            <?= SkillAcquire::getHTML_Button($stored->status,$stored->nbobs,$i->id, $patent->id) ?>
           </div>
         </div>
         <?php
