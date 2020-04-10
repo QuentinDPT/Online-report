@@ -30,6 +30,7 @@ if($domain->id == null)
   </head>
   <body>
     <?php $NavActive = "user" ?>
+    <?php $PageName = '<img class="rounded-circle" style="width:50px; height:50px;" src="'. $patent->image .'">'?>
     <?php require("./Views/Common/navbar.php") ?>
     <div class="container-lg">
       <?php
@@ -37,6 +38,9 @@ if($domain->id == null)
         require_once $ROOT . "/Controllers/ClassController.php" ;
         $Class = ClassroomController::getClassByTeacherId($User->teacher == null ? $User->id : $User->teacher) ;
       ?>
+      <div class="row">
+        <p><?= $patent->name ?></p>
+      </div>
       <div class="row">
         <?php
         foreach($Class->students as $i ){
