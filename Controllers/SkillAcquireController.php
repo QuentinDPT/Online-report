@@ -33,7 +33,7 @@ class SkillAcquireController extends Model_Base
 		if ($ok)
 		{
 			$req = $q->fetch(PDO::FETCH_ASSOC);
-      return new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
+      return new SkillAcquire($req['Id'], $req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
 		}
   }
 
@@ -48,7 +48,7 @@ class SkillAcquireController extends Model_Base
       do{
   			$req = $q->fetch(PDO::FETCH_ASSOC);
         if($req){
-          $sa = new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
+          $sa = new SkillAcquire($req['Id'], $req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
           array_push($ret, $sa) ;
         }
       }while($req) ;
@@ -66,7 +66,7 @@ class SkillAcquireController extends Model_Base
 		{
 			$req = $q->fetch(PDO::FETCH_ASSOC);
       if($req){
-        return new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
+        return new SkillAcquire($req['Id'], $req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
       }
 		}
   }
@@ -83,7 +83,7 @@ class SkillAcquireController extends Model_Base
       do{
   			$req = $q->fetch(PDO::FETCH_ASSOC);
         if($req){
-          $sa = new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
+          $sa = new SkillAcquire($req['Id'], $req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
           array_push($ret, $sa) ;
         }
       }while($req) ;
@@ -108,6 +108,25 @@ class SkillAcquireController extends Model_Base
         }
       }while($req) ;
       return $ret ;
+		}
+  }
+
+  public static function acquireSkill($UID, $SkID, $status, $nbObs, $note){
+    $line = SkillAcquireController::getSkillAcquireByStudentIDAndPatent($UID, $SkID) ;
+    $ok = true ;
+    if($line == null){
+  		$q  = self::$_db->prepare('INSERT INTO skillacquire (SkillAcq_ID, Student_ID, Skill_ID, ObsDate, Note, Status, NbObs)'.' VALUES (NULL, '. $UID .', '. $SkID .', CURRENT_TIMESTAMP, "'. $note .'", '. $status .', '. $nbObs .');');
+    }else{
+      var_dump($line) ;
+      $q  = self::$_db->prepare('UPDATE skillacquire SET'.' ObsDate=CURRENT_TIMESTAMP, Note="'. $note .'", Status="'. $status .'", NbObs="'. $nbObs .'" where SkillAcq_ID="'. $line->id .'";');
+      var_dump($q) ;
+    }
+	  $ok &= $q->execute();
+
+		if (!$ok)
+		{
+      echo "Erreur lors de l'affection à la base de données" ;
+      http_response_code(500) ;
 		}
   }
 }
