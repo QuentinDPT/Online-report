@@ -22,12 +22,24 @@ if($domain->id == null)
   <head>
     <?php $PageName = "Brevet " . $PatentId ?>
     <?php require("./Views/Common/header.php") ?>
+    <script src="/src/scripts/emoji-translation.js"></script>
+    <script type="text/javascript">
+      function btnrotate(id){
+        console.log(id) ;
+        let lm = document.getElementById("patent-"+id);
+        lm.attributes.status.nodeValue = parseInt(lm.attributes.status.nodeValue)+1;
+        lm.value=CodeToEmoji(lm.attributes.status.nodeValue);
+        document.getElementById("patent-desc-"+id).innerHTML = CodeToDesc(lm.attributes.status.nodeValue) ;
+        console.log(lm);
+      }
+    </script>
   </head>
   <body>
     <?php $NavActive = "user" ?>
     <?php require("./Views/Common/navbar.php") ?>
     <div class="container-lg">
       <?php
+        require_once $ROOT . "/Models/SkillAcquire.php" ;
         require_once $ROOT . "/Controllers/ClassController.php" ;
         $Class = ClassroomController::getClassByTeacherId($User->teacher == null ? $User->id : $User->teacher) ;
       ?>
@@ -36,9 +48,9 @@ if($domain->id == null)
         foreach($Class->students as $i ){
         ?>
         <div class="d-inline-flex justify-content-between w-100" style="height: 50px ;">
-          <?=$i->toHTML() ; ?>
-          <div class="d-flex justify-content-end align-items-center">
-            <input type="button" class="btn btn-outline-secondary" id='p<?= $i->id ?>' value="👍" onclick="(document.getElementById('p<?= $i->id ?>').value == '👍' ? document.getElementById('p<?= $i->id ?>').value = '👁' : document.getElementById('p<?= $i->id ?>').value == '👁' ? document.getElementById('p<?= $i->id ?>').value = '👎' : document.getElementById('p<?= $i->id ?>').value = '👍')">
+          <?= $i->toHTML() ; ?>
+          <div class="d-flex justify-content-end col-4 col-md-2 align-items-center">
+            <?= SkillAcquire::getHTML_Button(0,$i->id) ?>
           </div>
         </div>
         <?php
