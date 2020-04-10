@@ -24,12 +24,18 @@ if($domain->id == null)
     <?php require("./Views/Common/header.php") ?>
     <script src="/src/scripts/emoji-translation.js"></script>
     <script type="text/javascript">
-      function btnrotate(id){
+      function btnobs(id){
         console.log(id) ;
-        let lm = document.getElementById("patent-"+id);
-        lm.attributes.status.nodeValue = parseInt(lm.attributes.status.nodeValue)+1;
+        let lm = document.getElementById("patent-obs-"+id);
+        lm.attributes.status.nodeValue = (parseInt(lm.attributes.status.nodeValue)+1) %4;
+        lm.value=CodeToEmoji(0,parseInt(lm.attributes.status.nodeValue));
+        console.log(lm);
+      }
+      function btnreview(id){
+        console.log(id) ;
+        let lm = document.getElementById("patent-rw-"+id);
+        lm.attributes.status.nodeValue = (parseInt(lm.attributes.status.nodeValue)+1)%3;
         lm.value=CodeToEmoji(lm.attributes.status.nodeValue);
-        document.getElementById("patent-desc-"+id).innerHTML = CodeToDesc(lm.attributes.status.nodeValue) ;
         console.log(lm);
       }
     </script>

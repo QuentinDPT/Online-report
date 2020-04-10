@@ -50,8 +50,7 @@ class SkillAcquire
 
   public static function getHTML_Button($status, $id, $desc = true){
     return
-      ($desc ? '<label style="width:100%" for="patent-'.$id.'" id="patent-desc-'.$id.'">Réalisé</label>' : '') .
-      '<input type="button" class="btn btn-outline-dark" value="👍" id="patent-'.$id.'" status="2" onloadend=\'btnrotate('.$id.');\' onclick=\'btnrotate('.$id.');\' />
-      ' ;
+      '<input type="button" class="btn btn-outline-light" value="🔸🔸🔸" id="patent-obs-'.$id.'" status="0" onclick=\'btnobs('.$id.');\' />'.
+      '<input type="button" class="btn btn-outline-light" value="🔸" id="patent-rw-'.$id.'" status="0" onclick=\'btnreview('.$id.');\' />' ;
   }
 }
