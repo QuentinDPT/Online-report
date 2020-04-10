@@ -38,7 +38,7 @@ class SkillAcquireController extends Model_Base
   }
 
   public static function getSkillAcquireByStudentID($id){
-		$q  = self::$_db->prepare('SELECT * FROM '.SkillAcquireController::SKILLACQUIRE_TABLE.' WHERE Student_ID = :id AND Status = 1');
+		$q  = self::$_db->prepare('SELECT * FROM '.SkillAcquireController::SKILLACQUIRE_TABLE.' WHERE Student_ID = :id AND Status IN (1,2)');
 	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
 	  $ok &= $q->execute();
 
@@ -73,7 +73,7 @@ class SkillAcquireController extends Model_Base
 
 
   public static function getSkillObsByStudentID($id){
-		$q  = self::$_db->prepare('SELECT * FROM '.SkillAcquireController::SKILLACQUIRE_TABLE.' WHERE Student_ID = :id AND Status != 1');
+		$q  = self::$_db->prepare('SELECT * FROM '.SkillAcquireController::SKILLACQUIRE_TABLE.' WHERE Student_ID = :id AND Status NOT IN (1,2) AND NbObs != 0');
 	  $ok  = $q->bindValue(':id', $id, PDO::PARAM_STR);
 	  $ok &= $q->execute();
 
