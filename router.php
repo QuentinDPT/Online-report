@@ -68,8 +68,7 @@ switch($URL){
     require("./API/changeUserInfo.php") ;
     die() ;
   case "/api/acquireSkill" :
-    header("Location: /utilisateur/eleve");
-    //require("./API/changeUserInfo.php") ;
+    require("./API/acquireSkill.php") ;
     die() ;
 }
 

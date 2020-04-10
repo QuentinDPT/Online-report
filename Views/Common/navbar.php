@@ -38,8 +38,9 @@
     <?php
       if($User != null){
         echo '<div class="navbar-nav" ' . ($NavActive == "profile" ? "" : 'onclick="location.href = \'/mon-profil\';"') . '>' ;
-        echo '  <div class="nav-link ' . ($NavActive != "profile" ? "" : "active") . '">' ;
-        echo      '<div class="d-inline">' . $User->firstName . " " .  $User->name . '</div>' ;
+        echo '  <div class="nav-link d-inline ' . ($NavActive != "profile" ? "" : "active") . '">' ;
+        echo '    <span>' . $User->firstName . " <span class='font-weight-bold'>" .  $User->name . '</span></span>' ;
+        echo '    <span class="rounded-circle d-inline-block bg-danger" style="width:7px; height:7px;"></span>' ;
         echo '    <img class="rounded-circle" style="height:50px; width:50px;" src="' . $User->avatar . '" alt="Avatar">' ;
         echo '  </div>' ;
         echo '</div>' ;

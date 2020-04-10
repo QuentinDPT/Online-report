@@ -56,6 +56,21 @@ class SkillAcquireController extends Model_Base
 		}
   }
 
+  public static function getSkillAcquireByStudentIDAndPatent($UsrId, $PatentId){
+		$q  = self::$_db->prepare('SELECT * FROM '.SkillAcquireController::SKILLACQUIRE_TABLE.' WHERE Student_ID = :id AND Skill_ID = :skid');
+	  $ok  = $q->bindValue(':id', $UsrId, PDO::PARAM_STR);
+	  $ok &= $q->bindValue(':skid', $PatentId, PDO::PARAM_STR);
+	  $ok &= $q->execute();
+
+		if ($ok)
+		{
+			$req = $q->fetch(PDO::FETCH_ASSOC);
+      if($req){
+        return new SkillAcquire($req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
+      }
+		}
+  }
+
 
   public static function getSkillObsByStudentID($id){
 		$q  = self::$_db->prepare('SELECT * FROM '.SkillAcquireController::SKILLACQUIRE_TABLE.' WHERE Student_ID = :id AND Status != 1');
