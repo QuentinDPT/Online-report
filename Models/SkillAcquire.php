@@ -48,9 +48,13 @@ class SkillAcquire
       }
   }
 
-  public static function getHTML_Button($status, $id, $desc = true){
+  public static function getHTML_Button($status, $nbobs, $id){
     return
-      '<input type="button" class="btn btn-outline-light" value="🔸🔸🔸" id="patent-obs-'.$id.'" status="0" onclick=\'btnobs('.$id.');\' />'.
-      '<input type="button" class="btn btn-outline-light" value="🔸" id="patent-rw-'.$id.'" status="0" onclick=\'btnreview('.$id.');\' />' ;
+      '<input type="button" class="btn btn-outline-light" value="---" id="patent-obs-'.$id.'" status="'.$nbobs.'" onclick=\'btnobs('.$id.');\' />'.
+      '<input type="button" class="btn btn-outline-light" value="-" id="patent-rw-'.$id.'" status="'.$status.'" onclick=\'btnreview('.$id.');\' />'.
+      '<script>'.
+      ' document.getElementById("patent-obs-'.$id.'").value = CodeToEmoji(0,'.$nbobs.');'.
+      ' document.getElementById("patent-rw-' .$id.'").value = CodeToEmoji('.$status.');'.
+      '</script>' ;
   }
 }

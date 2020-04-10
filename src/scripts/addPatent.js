@@ -29,16 +29,16 @@ function changeObs(){
 
 }
 
-function createForm(name){
+function createForm(name, fct){
   return `
   <form action="/api/acquireSkill" method="post" class='col-sm-12 col-md-4'>
       <div class="row justify-content-between">
         <div class="w-auto">
           <h2>` + name + `</h2>
         </div>
-        <div>
-          <input type="button" class="btn btn-outline-light" id='obs' value="✔️" onclick="(document.getElementById('obs').value == '✔️' ? document.getElementById('obs').value = '❌' : document.getElementById('obs').value = '✔️')">
-        </div>
+        <div>` +
+        fct() +
+       `</div>
       </div>
       <div class="row" style="height:100%; margin-bottom: .5rem;">
         <textarea class="form-control" style="max-height:100% ; height:100% ;" placeholder="Mémo"></textarea>

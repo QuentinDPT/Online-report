@@ -7,6 +7,9 @@ if($User == null || $User->teacher != null){
 if(!is_numeric($PatentId))
   return ;
 
+
+  require_once $ROOT . '/Controllers/SkillAcquireController.php' ;
+
 require_once $ROOT . '/Controllers/SkillController.php' ;
 $patent = SkillController::getByDomainAndCode(($PatentId - $PatentId %100)/100, $PatentId %100) ;
 if($patent->id == null)
@@ -23,22 +26,7 @@ if($domain->id == null)
     <?php $PageName = "Brevet " . $PatentId ?>
     <?php require("./Views/Common/header.php") ?>
     <script src="/src/scripts/emoji-translation.js"></script>
-    <script type="text/javascript">
-      function btnobs(id){
-        console.log(id) ;
-        let lm = document.getElementById("patent-obs-"+id);
-        lm.attributes.status.nodeValue = (parseInt(lm.attributes.status.nodeValue)+1) %4;
-        lm.value=CodeToEmoji(0,parseInt(lm.attributes.status.nodeValue));
-        console.log(lm);
-      }
-      function btnreview(id){
-        console.log(id) ;
-        let lm = document.getElementById("patent-rw-"+id);
-        lm.attributes.status.nodeValue = (parseInt(lm.attributes.status.nodeValue)+1)%3;
-        lm.value=CodeToEmoji(lm.attributes.status.nodeValue);
-        console.log(lm);
-      }
-    </script>
+    <script src="/src/scripts/IO.patent.js"></script>
   </head>
   <body>
     <?php $NavActive = "user" ?>
@@ -52,11 +40,15 @@ if($domain->id == null)
       <div class="row">
         <?php
         foreach($Class->students as $i ){
+          $stored = SkillAcquireController::getSkillAcquireByStudentIDAndPatent($i->id, $patent->id) ;
+          if($stored == null){
+            $stored = new SkillAcquire(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) ;
+          }
         ?>
         <div class="d-inline-flex justify-content-between w-100" style="height: 50px ;">
           <?= $i->toHTML() ; ?>
           <div class="d-flex justify-content-end col-4 col-md-2 align-items-center">
-            <?= SkillAcquire::getHTML_Button(0,$i->id) ?>
+            <?= SkillAcquire::getHTML_Button($stored->status,$stored->nbobs,$i->id) ?>
           </div>
         </div>
         <?php

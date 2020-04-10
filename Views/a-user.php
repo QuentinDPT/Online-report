@@ -21,6 +21,8 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
   <head>
     <?php $PageName = $Usr->firstName ?>
     <?php require("./Views/Common/header.php") ?>
+    <script src="/src/scripts/emoji-translation.js"></script>
+    <script src="/src/scripts/IO.patent.js"></script>
     <script src="/src/scripts/addPatent.js"></script>
   </head>
   <body>
