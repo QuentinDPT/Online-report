@@ -15,7 +15,6 @@ $SkillsUnacq = SkillAcquireController::getUnacquiredSkillFromStudentID($Usr->id)
 require_once $ROOT . '/Controllers/DomainController.php' ;
 require_once $ROOT . '/Controllers/SkillController.php' ;
 ?>
-
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
@@ -39,10 +38,14 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
         }else{
           foreach ($Skills as $i) {
         ?>
-        <div class="col-md-4 col-sm-12 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentModifyClick(<?= $i->id ?>)">
+        <div class="col-12 col-md-4 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentModifyClick(<?= $i->id ?>)">
           <img src="<?= $i->image ?>">
           <p><?= $i->name ?></p>
-          <p><?= $i->note . " " . $i->status ?></p>
+          <p id="desc-<?= $i->id ?>"><?= $i->note?> </p>
+          <script type="text/javascript">
+            console.log(document.getElementById("desc-<?= $i->id ?>")) ;
+            document.getElementById("desc-<?= $i->id ?>").innerHTML += CodeToEmoji(0,<?=$i->nbobs?>) + CodeToEmoji(<?=$i->status?>) ;
+          </script>
         </div>
         <?php
           }
@@ -59,10 +62,14 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
         }else{
           foreach ($SkillsObs as $i) {
         ?>
-        <div class="col-md-4 col-sm-12 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentModifyClick(<?= $i->id ?>)">
+        <div class="col-12 col-md-4 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentModifyClick(<?= $i->id ?>, <?= $i->id ?>)">
           <img src="<?= $i->image ?>">
           <p><?= $i->name ?></p>
-          <p><?= $i->note . " " . $i->status ?></p>
+          <p id="desc-<?= $i->id ?>"><?= $i->note?> </p>
+          <script type="text/javascript">
+            console.log(document.getElementById("desc-<?= $i->id ?>")) ;
+            document.getElementById("desc-<?= $i->id ?>").innerHTML += CodeToEmoji(0,<?=$i->nbobs?>) + CodeToEmoji(<?=$i->status?>) ;
+          </script>
         </div>
         <?php
           }
@@ -79,7 +86,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
         }else{
           foreach ($SkillsUnacq as $i) {
         ?>
-        <div class="col-md-4 col-sm-12 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentAddClick(<?= $i->id ?>)">
+        <div class="col-12 col-md-4 text-center patent-container" id="p-<?= $i->id ?>" onclick="patentAddClick(<?= $i->id ?>)">
           <img src="<?= $i->image ?>">
           <p><?= $i->name ?></p>
         </div>
