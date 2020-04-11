@@ -24,10 +24,10 @@ if($User == null){
               <tbody>
                 <tr>
                   <td>
-                    <label class="w-100" for="password">Ancien mot de passe</label>
+                    <label class="w-100" for="password-a">Ancien mot de passe</label>
                   </td>
                   <td>
-                    <input class="w-100" type="password" id="password" name="password" placeholder="R75fg%l8">
+                    <input class="w-100" type="password" id="password-a" name="password-a" placeholder="R75fg%l8">
                   </td>
                 </tr>
                 <tr>
@@ -43,7 +43,7 @@ if($User == null){
                     <label class="w-100" for="password">Confirmation mot de passe</label>
                   </td>
                   <td>
-                    <input class="w-100" type="password" id="password" name="password" placeholder="R75fg%l8">
+                    <input class="w-100" type="password" id="password-c" name="password-c" placeholder="R75fg%l8">
                   </td>
                 </tr>
               </tbody>

@@ -36,7 +36,6 @@ catch (PDOException $e)
 require_once $ROOT . '/Models/User.php';
 
 Model_Base::set_db( $db );
-//-----------------------------------------------------------------------------
 
 require_once $ROOT . "/Controllers/UserController.php" ;
 $user = UserController::getUserByUsername($login) ;
@@ -51,7 +50,7 @@ if ( !UserController::log($user) )
 
 $_SESSION['user'] = serialize($user);
 
-if($user->_password == ""){
+if($_POST['password'] == ""){
   header('Location: ' . $LOCATION . '/mot-de-passe-faible');
 }else{
   header('Location: ' . $LOCATION . '/acceuil');

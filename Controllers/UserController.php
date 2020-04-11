@@ -92,7 +92,8 @@ class UserController extends Model_Base
 
 	public static function changePassword( $User, string $newpassword )
 	{
-		$q = self::$_db->prepare('UPDATE '.USER::USER_TABLE.' SET password = :password WHERE login = :login');
+    var_dump($User) ;
+		$q = self::$_db->prepare('UPDATE '.UserController::USER_TABLE.' SET password = :password WHERE login = :login');
 		$ok =  $q->bindValue(':login',    $User->login, PDO::PARAM_STR);
 		$ok &= $q->bindValue(':password', password_hash($newpassword,PASSWORD_DEFAULT),  PDO::PARAM_STR);
 		$ok &= $q->execute();
