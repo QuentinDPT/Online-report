@@ -70,6 +70,9 @@ switch($URL){
   case "/api/acquireSkill" :
     require("./API/acquireSkill.php") ;
     die() ;
+  case "/api/change-password" :
+    require("./API/changePassword.php") ;
+    die() ;
 }
 
 $URLHashed = explode('/',$URL) ;
