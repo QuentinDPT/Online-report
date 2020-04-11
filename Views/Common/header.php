@@ -2,6 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title><?php echo $ApplicationName . ($PageName == "" ? "" : " - " . $PageName) ?></title>
+<meta name=" theme-color" content="#343A40">
 
 <link rel="stylesheet" href="/src/lib/bootstrap-4.4.1-dist/css/bootstrap.min.css">
 
