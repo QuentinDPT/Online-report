@@ -78,7 +78,11 @@ if($User == null){
 
 
       <h3>Droits</h3>
-      <input type="button" class="btn btn-danger ml-2" name="" value="Supprimer mon compte">
+      <div class="d-flex flex-column ml-2 p-0 col-3">
+        <input type="button" class="btn btn-secondary" name="" value="Proposer des modifications" onclick="window.open('https://github.com/QuentinDPT/Online-report/issues','_blank');">
+        <input type="button" class="btn btn-warning mt-2" name="" value="Signaler un problème" onclick="window.open('https://github.com/QuentinDPT/Online-report/issues/new','_blank');">
+        <input type="button" class="btn btn-danger mt-2" name="" value="Supprimer mon compte">
+      </div>
     </div>
 
   </body>
