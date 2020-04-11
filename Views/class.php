@@ -18,7 +18,7 @@ if($User == null){
         require_once $ROOT . "/Controllers/ClassController.php" ;
         $Class = ClassroomController::getClassByTeacherId($User->teacher == null ? $User->id : $User->teacher) ;
       ?>
-      <ul>
+      <div>
         <?php
         foreach($Class->students as $i ){
         ?>
@@ -29,16 +29,16 @@ if($User == null){
         <?php
         }else{
         ?>
-        <li class="d-block w-100" style="height: 50px ;">
+        <span class="d-block w-100" style="height: 50px ;">
         <?php
         }
         echo $i->toHTML() ;
         ?>
-        </li>
+      </span>
         <?php
         }
         ?>
-      </ul>
+      </div>
     </div>
   </body>
 </html>
