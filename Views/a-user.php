@@ -97,51 +97,78 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
       </div>
     </div>
     <div class="d-none d-print-block">
-      <table class="w-100 table">
-        <thead>
-          <tr>
-            <th class="font-weight-bold h1"><?= $Usr->firstName ?></th>
-          </tr>
-        </thead>
+      <style media="print">
+        @page{
+          size: A4;
+          margin: 0;
+
+          height: 297mm;
+          width: 210mm;
+        }
+        body{
+          position: absolute;
+          top:0;
+          bottom:0;
+          right:0;
+          left:0;
+        }
+        body>*{
+          position:relative;
+          width:100%;
+          height:100% ;
+          padding: 25mm 25mm 25mm 25mm;
+          background-color: #FFF ;
+        }
+      </style>
+      <div type="text/css" style="display:flex; flex-direction:column; height:100% ;flex-wrap:wrap;">
+        <div class="">
+          <h1 class="font-weight-bold h1"><?= $Usr->firstName ?></h1>
+          <p>impression du <?= date('d/m/Y à H:i') ?></p>
+        </div>
+        <?php
+        $Domains = DomainController::getAll() ;
+        foreach($Domains as $i){
+        ?>
+        <table class="w-50">
+          <thead>
+            <th class="h2 text-center w-100" scope="col"><?= $i->name ?></th>
+          </thead>
           <tbody>
-          <?php
-          $Domains = DomainController::getAll() ;
-          foreach($Domains as $i){
-          ?>
-          <tr style="page-break-before: always">
-            <th class="h2 text-center" scope="col"><?= $i->name ?></th>
-          </tr>
-          <tr>
-            <td>
-              <table class="w-100">
-                <tbody>
-                  <?php
-                    $Skills = SkillController::getByDomainID($i->id);
-                    foreach($Skills as $j) {
-                  ?>
-                  <tr>
-                    <td><?= $j->name ?></td>
-                    <td>
-                      <?php
-                      $res = SkillAcquireController::getSkillAcquireBySkillID($j->id) ;
-                      if($res != null && $res->id != null){
-                        echo $res->getIcon() ;
-                      }
-                      ?>
-                    </td>
-                  </tr>
-                  <?php
-                    }
-                  ?>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-          <?php
-          }
-          ?>
-        </tbody>
-      </table>
+            <?php
+              $Skills = SkillController::getByDomainID($i->id);
+              foreach($Skills as $j) {
+            ?>
+            <tr>
+              <td><?= $j->name ?></td>
+
+              <?php
+              $res = SkillAcquireController::getSkillAcquireBySkillID($j->id) ;
+              if($res != null && $res->id != null){
+              ?>
+              <td id="descp-<?= $res->id ?>">
+                <script type="text/javascript">
+                  document.getElementById("descp-<?= $res->id ?>").innerHTML += CodeToEmoji(0,<?=$res->nbobs?>) + CodeToEmoji(<?=$res->status?>) ;
+                </script>
+              </td>
+              <?php
+            }else{
+              ?>
+              <td id="descp-<?= $res->id ?>">
+                🔘🔘🔘🔘
+              </td>
+            <?php
+            }
+            ?>
+            </tr>
+            <?php
+              }
+            ?>
+          </tbody>
+        </table>
+        <?php
+        }
+        ?>
+      </div>
     </div>
   </body>
 </html>
