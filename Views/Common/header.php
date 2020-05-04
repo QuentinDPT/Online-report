@@ -9,7 +9,7 @@
 <meta property="og:image" content="http://laclasse.depotter.fr/src/img/social.png">
 <meta property="og:url" content="http://laclasse.depotter.fr/connexion">
 
-<meta property="og:site_name" content="European Travel, Inc.">
+<meta property="og:site_name" content="Developped by Quentin de POTTER">
 
 <link rel="stylesheet" href="/src/lib/bootstrap-4.4.1-dist/css/bootstrap.min.css">
 

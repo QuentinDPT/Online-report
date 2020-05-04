@@ -154,7 +154,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
             }else{
               ?>
               <td id="descp-<?= $res->id ?>">
-                🔘🔘🔘🔘
+                ⚪️⚪️⚪️⚪️
               </td>
             <?php
             }
