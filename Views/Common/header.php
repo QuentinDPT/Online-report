@@ -29,11 +29,11 @@
   @page { size: auto;  margin: 0mm; }
   body{
 
-  }
+  }/*
   th, .h2, h1{
     font-size: 48pt ;
   }
   td, p{
     font-size: 32pt ;
-  }
+  }*/
 </style>
