@@ -13,7 +13,7 @@ class SkillAcquire
   public $status ;
   public $obsdate ;
   public $nbobs ;
-
+  //                    Id   Skill_ID   Student_ID   Code   Name   Image   Trimester   Domain_ID   Note   Status   ObsDate   NbObs
   function __construct($id, $skill_id, $student_id, $code, $name, $image, $trimester, $domain_id, $note, $status, $obsdate, $nbobs){
     $this->id         = $id ;
     $this->student_id = $student_id ;

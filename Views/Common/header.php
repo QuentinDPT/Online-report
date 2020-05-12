@@ -21,13 +21,19 @@
     font-family: siteFont;
     src: url(<?= $LOCATION ?>"/src/font.ttf");
   }
-
   body{
     /*font-family: siteFont ;*/
   }
 </style>
 <style type="text/css" media="print">
   @page { size: auto;  margin: 0mm; }
+  body{
 
-  @media print{@page {size: landscape}}
+  }
+  th, .h2, h1{
+    font-size: 48pt ;
+  }
+  td, p{
+    font-size: 32pt ;
+  }
 </style>

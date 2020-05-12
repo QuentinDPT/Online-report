@@ -111,13 +111,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
           bottom:0;
           right:0;
           left:0;
-        }
-        body>*{
-          position:relative;
-          width:100%;
-          height:100% ;
-          padding: 25mm 25mm 25mm 25mm;
-          background-color: #FFF ;
+          padding: 25mm 50mm 25mm 50mm;
         }
       </style>
       <div type="text/css" style="display:flex; flex-direction:column; height:100% ;flex-wrap:wrap;">
@@ -129,7 +123,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
         $Domains = DomainController::getAll() ;
         foreach($Domains as $i){
         ?>
-        <table class="w-50">
+        <table class="w-100">
           <thead>
             <th class="h2 text-center w-100" scope="col"><?= $i->name ?></th>
           </thead>
@@ -142,7 +136,7 @@ require_once $ROOT . '/Controllers/SkillController.php' ;
               <td><?= $j->name ?></td>
 
               <?php
-              $res = SkillAcquireController::getSkillAcquireBySkillID($j->id) ;
+              $res = SkillAcquireController::getSkillAcquireByStudentIDAndPatent($Usr->id,$j->id) ;
               if($res != null && $res->id != null){
               ?>
               <td id="descp-<?= $res->id ?>">

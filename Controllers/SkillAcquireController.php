@@ -65,9 +65,7 @@ class SkillAcquireController extends Model_Base
 		if ($ok)
 		{
 			$req = $q->fetch(PDO::FETCH_ASSOC);
-      if($req){
-        return new SkillAcquire($req['Id'], $req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
-      }
+      return new SkillAcquire($req['Id'], $req['Skill_ID'], $req['Student_ID'], $req['Code'], $req['Name'], $req['Image'], $req['Trimester'], $req['Domain_ID'], $req['Note'], $req['Status'], $req['ObsDate'], $req['NbObs']) ;
 		}
   }
 
