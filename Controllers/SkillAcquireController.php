@@ -112,12 +112,12 @@ class SkillAcquireController extends Model_Base
   public static function acquireSkill($UID, $SkID, $status, $nbObs, $note){
     $line = SkillAcquireController::getSkillAcquireByStudentIDAndPatent($UID, $SkID) ;
     $ok = true ;
-    if($line == null){
+    var_dump($line) ;
+    if($line == null || $line->id == null){
+      var_dump("insertion") ;
   		$q  = self::$_db->prepare('INSERT INTO skillacquire (SkillAcq_ID, Student_ID, Skill_ID, ObsDate, Note, Status, NbObs)'.' VALUES (NULL, '. $UID .', '. $SkID .', CURRENT_TIMESTAMP, "'. $note .'", '. $status .', '. $nbObs .');');
     }else{
-      var_dump($line) ;
       $q  = self::$_db->prepare('UPDATE skillacquire SET'.' ObsDate=CURRENT_TIMESTAMP, Note="'. $note .'", Status="'. $status .'", NbObs="'. $nbObs .'" where SkillAcq_ID="'. $line->id .'";');
-      var_dump($q) ;
     }
 	  $ok &= $q->execute();
 

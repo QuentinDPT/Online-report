@@ -14,4 +14,6 @@ if ( !isset($_POST['nbobs']) || !isset($_POST['status']) || !isset($_POST['UID']
 
 require_once $ROOT . "/Controllers/SkillAcquireController.php" ;
 
+var_dump($_POST) ;
+
 SkillAcquireController::acquireSkill($_POST['UID'], $_POST['SkID'], $_POST['status'], $_POST['nbobs'], !isset($_POST['note']) ? "" : $_POST['note']) ;

@@ -45,8 +45,8 @@ if($domain->id == null)
         <?php
         foreach($Class->students as $i ){
           $stored = SkillAcquireController::getSkillAcquireByStudentIDAndPatent($i->id, $patent->id) ;
-          if($stored == null){
-            $stored = new SkillAcquire(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) ;
+          if($stored == null || $stored->id == null){
+            $stored = new SkillAcquire(0, $patent->id, $i->id, 0, 0, 0, 0, 0, 0, 0, 0, 0) ;
           }
         ?>
         <div class="d-inline-flex justify-content-between w-100" style="height: 50px ;">
@@ -58,10 +58,6 @@ if($domain->id == null)
         <?php
         }
         ?>
-      </div>
-      <div class="row">
-        <div class="col-sm-0 col-md-9"></div>
-        <input type="button" class="btn btn-primary col-sm-12 col-md-3" value="Valider les modifications">
       </div>
     </div>
   </body>
