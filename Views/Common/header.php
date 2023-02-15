@@ -4,6 +4,8 @@
 <title><?php echo $ApplicationName . ($PageName == "" ? "" : " - " . $PageName) ?></title>
 <meta name="theme-color" content="#343A40">
 
+<meta name="mobile-web-app-capable" content="yes">
+
 <meta property="og:title" content="<?php echo $ApplicationName ?>">
 <meta property="og:description" content="Système de notation des classes maternelles">
 <meta property="og:image" content="http://laclasse.depotter.fr/src/img/social.png">

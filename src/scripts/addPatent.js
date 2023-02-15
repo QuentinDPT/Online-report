@@ -15,14 +15,18 @@ function patentAddClick(id){
   let element = document.getElementById("p-"+id) ;
   console.log(element) ;
   loadingElement.style = 'display:block' ;
-  loadingElement.innerHTML = createForm("Accorder le brevet") ;
+  loadingElement.innerHTML = createForm("Accorder le brevet",function(){
+    return "";
+  }) ;
 }
 
 function patentModifyClick(id){
   let element = document.getElementById("p-"+id) ;
   console.log(element) ;
   loadingElement.style = 'display:block' ;
-  loadingElement.innerHTML = createForm("Modifier le brevet") ;
+  loadingElement.innerHTML = createForm("Modifier le brevet",function(){
+    return "";
+  }) ;
 }
 
 function changeObs(){
